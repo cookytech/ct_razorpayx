@@ -1,22 +1,30 @@
 import { Notes } from '../types/types';
 import AxiosClient from '../utils/axios_client';
+import { normalizeDate } from '../utils/utils';
 
-enum ContactType {
+enum UserType {
   vendor = 'vendor',
   customer = 'customer',
   employee = 'employee',
   self = 'self',
 }
-interface CreateContactParams {
+export interface CreateContactParams {
   name: string;
   email?: string;
   contact?: string;
-  type?: ContactType | string;
+  type?: UserType | string;
   reference_id?: string;
   notes: Notes;
 }
-
-interface CreateContactResponse {
+interface UpdateContactParams {
+  name?: string;
+  email?: string;
+  contact?: string;
+  type?: UserType | string;
+  reference_id?: string;
+  notes: Notes;
+}
+interface Contact {
   id: string;
   entity: string;
   name: string;
@@ -29,10 +37,112 @@ interface CreateContactResponse {
   notes: Notes;
   created_at: number;
 }
+
+interface AllContactsResponse {
+  entity: string;
+  count: number;
+  items: Contact[];
+}
+export interface FetchContactQueryParams {
+  name?: string;
+  email?: string;
+  contact?: string;
+  reference_id?: string;
+  active?: boolean;
+  type?: UserType | string;
+  from?: number | string | Date;
+  to?: number | string | Date;
+  count?: number;
+  skip?: number;
+}
 export default function contacts(axiosClient: AxiosClient) {
+  const BASE_URL = '/contacts';
   return {
+    /**
+     * Create a contact.
+     *
+     * DOCS: https://razorpay.com/docs/razorpayx/api/contacts/#create-a-contact
+     * @param params New Contact Parameters
+     * @returns
+     */
     async create(params: CreateContactParams) {
-      return axiosClient.post<CreateContactResponse>({ url: '/contacts', data: params });
+      let url = BASE_URL;
+      return axiosClient.post<Contact>({ url, data: params });
+    },
+    /**
+     * Update details for an existing contact. Only send parameters you want to change in the request body.
+     *
+     * DOCS: https://razorpay.com/docs/razorpayx/api/contacts/#update-a-contact
+     * @param contactId The unique identifier linked to the contact. For example, `cont_00000000000001`
+     * @param params Update Contact Parameters
+     * @returns
+     */
+    async update(contactId: string, params: UpdateContactParams) {
+      if (!contactId) {
+        throw new Error('`contactId` is missing');
+      }
+      let url = `${BASE_URL}/${contactId}`;
+      return axiosClient.post<Contact>({ url, data: params });
+    },
+    /**
+     * Activate or deactivate a contact. This helps you block payouts to certain contacts, as and when required.
+     *
+     * DOCS: https://razorpay.com/docs/razorpayx/api/contacts/#activate-or-deactivate-a-contact
+     * @param contactId The unique identifier linked to the contact. For example, `cont_00000000000001`
+     * @param active The state to which you want to move the contact.
+     * A contact can have the following two states:
+     *
+     * `true` (default) = active
+     *
+     * `false` = inactive
+     *
+     * Pass false to deactivate an active contact and pass true to activate a deactivated contact.
+     * @returns
+     */
+    async toggleActiveContact(contactId: string, active: boolean) {
+      if (!contactId) {
+        throw new Error('`contactId` is missing');
+      }
+      if (active == undefined) {
+        throw new Error('`active` is missing');
+      }
+      return axiosClient.patch<Contact>({ url: `/contacts/${contactId}`, data: { active } });
+    },
+    /**
+     * Fetch details of all contacts.
+     *
+     * DOCS: https://razorpay.com/docs/razorpayx/api/contacts/#fetch-all-contacts
+     * @param params query paramaters {@link FetchContactQueryParams}
+     * @returns
+     */
+    async fetchAll(params: FetchContactQueryParams) {
+      let { from, to, count, skip } = params,
+        url = BASE_URL;
+
+      if (from) {
+        from = normalizeDate(from);
+      }
+
+      if (to) {
+        to = normalizeDate(to);
+      }
+      count = Number(count) || 10;
+      skip = Number(skip) || 0;
+      return axiosClient.get<AllContactsResponse>({ url, data: { ...params, from, to, count, skip } });
+    },
+    /**
+     * Fetch details of a specific contact.
+     *
+     * DOCS: https://razorpay.com/docs/razorpayx/api/contacts/#fetch-a-contact-by-id
+     * @param contactId The unique identifier linked to the contact. For example, `cont_00000000000001`
+     * @returns The Specific Contact {@link Contact}
+     */
+    async fetch(contactId: string) {
+      if (!contactId) {
+        throw new Error('`contactId` is missing');
+      }
+      let url = `${BASE_URL}/${contactId}`;
+      return axiosClient.get<Contact>({ url });
     },
   };
 }

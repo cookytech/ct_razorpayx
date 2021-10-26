@@ -28,9 +28,9 @@ export const mock = function (params: any) {
   const { url, method = 'GET', requestBody, replyWithError } = params;
   const status = replyWithError ? 400 : 200;
   let requestQueryParams: any;
-  const nUrl = normalizeUrl(`/${version}/${url}`);
+  const normalizedUrl = normalizeUrl(`/${version}/${url}`);
   nock(host)
-    .intercept(nUrl, method)
+    .intercept(normalizedUrl, method)
     .query((qp: any): true => {
       requestQueryParams = qp;
       return true;
