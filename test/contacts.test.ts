@@ -2,13 +2,13 @@ import { assert } from 'chai';
 import mock, { MockResponse } from './mocker';
 import razorpayx from './razorpayx';
 import equal from 'deep-equal';
-import { FetchContactQueryParams } from '../src/resources/contacts';
+import { CreateContactParams, FetchContactQueryParams } from '../src/resources/contacts';
 import querystring from 'querystring';
 import { getDateInSecs } from '../src/utils/utils';
 
-describe('CONTACTS', () => {
+describe('contacts', () => {
   it('Create Contact', async () => {
-    let params = {
+    let params: CreateContactParams = {
       name: 'test',
       email: 'test@razorpay.com',
       contact: '123456789',
@@ -18,7 +18,7 @@ describe('CONTACTS', () => {
       },
     };
 
-    let expectedParams = {
+    let expectedParams: CreateContactParams = {
       name: 'test',
       email: 'test@razorpay.com',
       contact: '123456789',

@@ -1,6 +1,7 @@
 import npmPackage from '../package.json';
 import Contacts from './resources/contacts';
 import FundAccount from './resources/fund-account';
+import Payout from './resources/payout';
 import AxiosClient from './utils/axios-client';
 
 class Razorpayx {
@@ -8,6 +9,7 @@ class Razorpayx {
   static PACKAGE_NAME = npmPackage.name || 'ctrazorpayx';
   contacts: ReturnType<typeof Contacts>;
   fundAccount: ReturnType<typeof FundAccount>;
+  payout: ReturnType<typeof Payout>;
   constructor(
     options: { key_id: string; key_secret: string; headers?: { [key: string]: string } } = {
       key_id: '',
@@ -33,6 +35,7 @@ class Razorpayx {
     });
     this.contacts = Contacts(axiosClient);
     this.fundAccount = FundAccount(axiosClient);
+    this.payout = Payout(axiosClient);
   }
 }
 

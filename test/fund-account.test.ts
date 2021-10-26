@@ -30,7 +30,7 @@ describe('Fund Account', () => {
     assert.equal(data.__JUST_FOR_TESTS__.url, '/v1/fund_accounts', 'Create Fund Account request url formed');
     assert.ok(equal(data.__JUST_FOR_TESTS__.requestBody, expectedParams), 'All params are passed in request body');
   });
-  it('Toggle FundAccount', async () => {
+  it('Toggle Fund Account', async () => {
     const active = false;
     const fundAccountId = 'fa_1234';
     let expectedParams = {
@@ -51,7 +51,7 @@ describe('Fund Account', () => {
     );
     assert.ok(equal(data.__JUST_FOR_TESTS__.requestBody, expectedParams), 'All params are passed in request body');
   });
-  it('Fetch All FundAccounts', async () => {
+  it('Fetch All Fund Accounts', async () => {
     const fromDate = new Date();
     fromDate.setFullYear(2002);
     const toDate = new Date();
