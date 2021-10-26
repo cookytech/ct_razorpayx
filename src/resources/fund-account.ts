@@ -8,12 +8,14 @@ export interface CreateFundAccountParams {
   vpa?: Vpa;
   bank_account?: BankAccount;
   card?: Card;
+  wallet?: Wallet;
 }
 
 export enum AccountType {
   vpa = 'vpa',
   bankAccount = 'bank_account',
   card = 'card',
+  wallet = 'wallet',
 }
 export interface Vpa {
   address: string;
@@ -26,6 +28,12 @@ export interface BankAccount {
   name: string;
   ifsc: string;
   account_number: string;
+}
+export interface Wallet {
+  provider: 'amazonpay';
+  phone: string;
+  email?: string;
+  name?: string;
 }
 
 export interface FundAccount {
@@ -80,6 +88,11 @@ export default function fundAccount(axiosClient: AxiosClient) {
         case AccountType.bankAccount:
           if (!params.bank_account) {
             throw new Error('`bank_account` is missing');
+          }
+          break;
+        case AccountType.wallet:
+          if (!params.wallet) {
+            throw new Error('`wallet` is missing');
           }
           break;
         default:
