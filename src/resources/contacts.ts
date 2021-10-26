@@ -2,7 +2,7 @@ import { Notes } from '../types/types';
 import AxiosClient from '../utils/axios_client';
 import { normalizeDate } from '../utils/utils';
 
-enum UserType {
+export enum UserType {
   vendor = 'vendor',
   customer = 'customer',
   employee = 'employee',
@@ -16,7 +16,7 @@ export interface CreateContactParams {
   reference_id?: string;
   notes: Notes;
 }
-interface UpdateContactParams {
+export interface UpdateContactParams {
   name?: string;
   email?: string;
   contact?: string;
@@ -24,7 +24,7 @@ interface UpdateContactParams {
   reference_id?: string;
   notes: Notes;
 }
-interface Contact {
+export interface Contact {
   id: string;
   entity: string;
   name: string;
@@ -38,7 +38,7 @@ interface Contact {
   created_at: number;
 }
 
-interface AllContactsResponse {
+export interface AllContactsResponse {
   entity: string;
   count: number;
   items: Contact[];
