@@ -1,4 +1,4 @@
-import { Notes } from '../types/types';
+import { FetchQueryParams, Notes } from '../types/types';
 import AxiosClient from '../utils/axios-client';
 import { normalizeDate } from '../utils/utils';
 
@@ -43,17 +43,13 @@ export interface AllContactsResponse {
   count: number;
   items: Contact[];
 }
-export interface FetchContactQueryParams {
+export interface FetchContactQueryParams extends FetchQueryParams {
   name?: string;
   email?: string;
   contact?: string;
   reference_id?: string;
   active?: boolean;
   type?: UserType | string;
-  from?: number | string | Date;
-  to?: number | string | Date;
-  count?: number;
-  skip?: number;
 }
 export default function contacts(axiosClient: AxiosClient) {
   const BASE_URL = '/contacts';
@@ -88,7 +84,7 @@ export default function contacts(axiosClient: AxiosClient) {
         throw new Error('`contactId` is missing');
       }
       let url = `${BASE_URL}/${contactId}`;
-      return axiosClient.post<Contact>({ url, data: params });
+      return axiosClient.patch<Contact>({ url, data: params });
     },
     /**
      * Activate or deactivate a contact. This helps you block payouts to certain contacts, as and when required.
@@ -124,7 +120,9 @@ export default function contacts(axiosClient: AxiosClient) {
     async fetchAll(params: FetchContactQueryParams) {
       let { from, to, count, skip } = params,
         url = BASE_URL;
-
+      if (count && count > 100) {
+        throw new Error('`count` can be maximum of 100');
+      }
       if (from) {
         from = normalizeDate(from);
       }

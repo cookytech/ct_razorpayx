@@ -1,5 +1,3 @@
-'use strict';
-
 import { assert } from 'chai';
 import mock, { MockResponse } from './mocker';
 import razorpayx from './razorpayx';
@@ -63,7 +61,7 @@ describe('CONTACTS', () => {
 
     mock({
       url: `/contacts/${contactId}`,
-      method: 'POST',
+      method: 'PATCH',
     });
 
     const response = await razorpayx.contacts.update(contactId, params);
@@ -110,7 +108,6 @@ describe('CONTACTS', () => {
       count: 20,
       skip: 1,
     };
-    // const qs = querystring.stringify(params);
     mock({
       url: '/contacts',
       method: 'GET',
