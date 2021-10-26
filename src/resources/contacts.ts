@@ -1,5 +1,5 @@
 import { Notes } from '../types/types';
-import AxiosClient from '../utils/axios_client';
+import AxiosClient from '../utils/axios-client';
 import { normalizeDate } from '../utils/utils';
 
 export enum UserType {
@@ -61,7 +61,13 @@ export default function contacts(axiosClient: AxiosClient) {
     /**
      * Create a contact.
      *
-     * DOCS: https://razorpay.com/docs/razorpayx/api/contacts/#create-a-contact
+     * * A new contact is created if any combination of the following details is unique: name, email, contact, type and reference_id.
+     *
+     * * If all the above details match the details of an existing contact, the API returns details of the existing contact.
+     *
+     * * Use the Update Contact API (`contacts.update`) if you want to make changes to an existing contact.
+     *
+     * https://razorpay.com/docs/razorpayx/api/contacts/#create-a-contact
      * @param params New Contact Parameters
      * @returns
      */

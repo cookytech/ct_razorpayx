@@ -1,6 +1,6 @@
 import npmPackage from '../package.json';
 import Contacts from './resources/contacts';
-import AxiosClient from './utils/axios_client';
+import AxiosClient from './utils/axios-client';
 
 class Razorpayx {
   static VERSION = npmPackage.version || '1.0.0';
