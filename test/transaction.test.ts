@@ -1,7 +1,7 @@
 import { assert } from 'chai';
 import equal from 'deep-equal';
 import { FetchContactQueryParams } from '../src/resources/contacts';
-import { FetchQueryParams } from '../src/types/types';
+import { FetchAllQueryParams } from '../src/types/types';
 import { getDateInSecs } from '../src/utils/utils';
 import mock, { MockResponse } from './utils/mocker';
 import razorpayx from './utils/razorpayx';
@@ -16,7 +16,7 @@ describe('Transaction', () => {
     const toDateInSec = getDateInSecs(toDate);
 
     const accountNumber = '1234';
-    let params: FetchQueryParams = {
+    let params: FetchAllQueryParams = {
       from: fromDate,
       to: toDateInSec,
       count: 20,

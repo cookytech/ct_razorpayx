@@ -1,7 +1,7 @@
 export interface Notes {
   [key: string]: string;
 }
-export interface FetchQueryParams {
+export interface FetchAllQueryParams {
   from?: number | string | Date;
   to?: number | string | Date;
   count?: number;

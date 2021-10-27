@@ -1,7 +1,7 @@
 import {
   CurrencyType,
   FetchAllResponse,
-  FetchQueryParams,
+  FetchAllQueryParams,
   Notes,
   TransactionMode,
   TransactionStatus,
@@ -50,7 +50,7 @@ export interface Payout {
   failure_reason: string;
   created_at: number;
 }
-export interface FetchAllPayoutParams extends FetchQueryParams {
+export interface FetchAllPayoutParams extends FetchAllQueryParams {
   contact_id?: string;
   fund_account_id?: string;
   mode?: FetchAllPayoutMode;
@@ -114,7 +114,7 @@ export default function payout(axiosClient: AxiosClient) {
       return axiosClient.get<FetchAllResponse<Payout>>({ url, data: { ...params, from, to, count, skip } });
     },
     /**
-     * Fetch details of a srequired payout.
+     * Fetch details of a required payout.
      *
      * https://razorpay.com/docs/razorpayx/api/payouts/#fetch-a-payout-by-id
      * @param payoutId This is the unique identifier linked to the payout. For example, `pout_00000000000001`.

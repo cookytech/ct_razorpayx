@@ -3,6 +3,7 @@ import Contacts from './resources/contacts';
 import FundAccount from './resources/fund-account';
 import Payout from './resources/payout';
 import Transaction from './resources/transactions';
+import PayoutLink from './resources/payout-link';
 import AxiosClient from './utils/axios-client';
 
 class Razorpayx {
@@ -12,6 +13,7 @@ class Razorpayx {
   fundAccount: ReturnType<typeof FundAccount>;
   payout: ReturnType<typeof Payout>;
   transaction: ReturnType<typeof Transaction>;
+  payoutLink: ReturnType<typeof PayoutLink>;
   constructor(
     options: { key_id: string; key_secret: string; headers?: { [key: string]: string } } = {
       key_id: '',
@@ -39,6 +41,7 @@ class Razorpayx {
     this.fundAccount = FundAccount(axiosClient);
     this.payout = Payout(axiosClient);
     this.transaction = Transaction(axiosClient);
+    this.payoutLink = PayoutLink(axiosClient);
   }
 }
 

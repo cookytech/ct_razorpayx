@@ -1,7 +1,7 @@
 import {
   CurrencyType,
   FetchAllResponse,
-  FetchQueryParams,
+  FetchAllQueryParams,
   Notes,
   TransactionMode,
   TransactionStatus,
@@ -49,7 +49,7 @@ export default function transactions(axiosClient: AxiosClient) {
      * @param params query paramaters {@link FetchQueryParams}
      * @returns
      */
-    async fetchAll(accountNumber: string, params: FetchQueryParams) {
+    async fetchAll(accountNumber: string, params: FetchAllQueryParams) {
       let { from, to, count, skip } = params;
       const url = `${BASE_URL}?account_number=${accountNumber}`;
       if (count && count > 100) {

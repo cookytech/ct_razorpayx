@@ -1,4 +1,4 @@
-import { FetchAllResponse, FetchQueryParams } from '../types/types';
+import { FetchAllResponse, FetchAllQueryParams } from '../types/types';
 import AxiosClient from '../utils/axios-client';
 import { normalizeDate } from '../utils/utils';
 
@@ -49,7 +49,7 @@ export interface FundAccount {
   card?: Card;
 }
 
-export interface FetchAllFundAccountParms extends FetchQueryParams {
+export interface FetchAllFundAccountParms extends FetchAllQueryParams {
   account_type?: AccountType;
   contact_id?: string;
 }

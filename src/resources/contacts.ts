@@ -1,4 +1,4 @@
-import { FetchAllResponse, FetchQueryParams, Notes } from '../types/types';
+import { FetchAllResponse, FetchAllQueryParams, Notes } from '../types/types';
 import AxiosClient from '../utils/axios-client';
 import { normalizeDate } from '../utils/utils';
 
@@ -38,7 +38,7 @@ export interface Contact {
   created_at: number;
 }
 
-export interface FetchContactQueryParams extends FetchQueryParams {
+export interface FetchContactQueryParams extends FetchAllQueryParams {
   name?: string;
   email?: string;
   contact?: string;
