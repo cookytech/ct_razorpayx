@@ -1,4 +1,4 @@
-import Razorpayx from '../src/razorpayx';
+import Razorpayx from '../../src/razorpayx';
 
 const razorpayx = new Razorpayx({
   key_id: 'XXX',

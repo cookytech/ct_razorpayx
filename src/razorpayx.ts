@@ -2,6 +2,7 @@ import npmPackage from '../package.json';
 import Contacts from './resources/contacts';
 import FundAccount from './resources/fund-account';
 import Payout from './resources/payout';
+import Transaction from './resources/transactions';
 import AxiosClient from './utils/axios-client';
 
 class Razorpayx {
@@ -10,6 +11,7 @@ class Razorpayx {
   contacts: ReturnType<typeof Contacts>;
   fundAccount: ReturnType<typeof FundAccount>;
   payout: ReturnType<typeof Payout>;
+  transaction: ReturnType<typeof Transaction>;
   constructor(
     options: { key_id: string; key_secret: string; headers?: { [key: string]: string } } = {
       key_id: '',
@@ -36,6 +38,7 @@ class Razorpayx {
     this.contacts = Contacts(axiosClient);
     this.fundAccount = FundAccount(axiosClient);
     this.payout = Payout(axiosClient);
+    this.transaction = Transaction(axiosClient);
   }
 }
 

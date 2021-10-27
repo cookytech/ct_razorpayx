@@ -1,4 +1,4 @@
-import { FetchQueryParams } from '../types/types';
+import { FetchAllResponse, FetchQueryParams } from '../types/types';
 import AxiosClient from '../utils/axios-client';
 import { normalizeDate } from '../utils/utils';
 
@@ -54,11 +54,6 @@ export interface FetchAllFundAccountParms extends FetchQueryParams {
   contact_id?: string;
 }
 
-export interface AllFundAccountResponse {
-  entity: string;
-  count: number;
-  items: FundAccount[];
-}
 export default function fundAccount(axiosClient: AxiosClient) {
   const BASE_URL = '/fund_accounts';
   return {
@@ -149,7 +144,7 @@ export default function fundAccount(axiosClient: AxiosClient) {
       }
       count = Number(count) || 10;
       skip = Number(skip) || 0;
-      return axiosClient.get<AllFundAccountResponse>({ url, data: { ...params, from, to, count, skip } });
+      return axiosClient.get<FetchAllResponse<FundAccount>>({ url, data: { ...params, from, to, count, skip } });
     },
     /**
      * Fetch details of required fund account.

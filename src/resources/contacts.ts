@@ -1,4 +1,4 @@
-import { FetchQueryParams, Notes } from '../types/types';
+import { FetchAllResponse, FetchQueryParams, Notes } from '../types/types';
 import AxiosClient from '../utils/axios-client';
 import { normalizeDate } from '../utils/utils';
 
@@ -38,11 +38,6 @@ export interface Contact {
   created_at: number;
 }
 
-export interface AllContactsResponse {
-  entity: string;
-  count: number;
-  items: Contact[];
-}
 export interface FetchContactQueryParams extends FetchQueryParams {
   name?: string;
   email?: string;
@@ -132,7 +127,7 @@ export default function contacts(axiosClient: AxiosClient) {
       }
       count = Number(count) || 10;
       skip = Number(skip) || 0;
-      return axiosClient.get<AllContactsResponse>({ url, data: { ...params, from, to, count, skip } });
+      return axiosClient.get<FetchAllResponse<Contact>>({ url, data: { ...params, from, to, count, skip } });
     },
     /**
      * Fetch details of a specific contact.

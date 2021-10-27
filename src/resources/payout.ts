@@ -1,4 +1,11 @@
-import { FetchQueryParams, Notes } from '../types/types';
+import {
+  CurrencyType,
+  FetchAllResponse,
+  FetchQueryParams,
+  Notes,
+  TransactionMode,
+  TransactionStatus,
+} from '../types/types';
 import AxiosClient from '../utils/axios-client';
 import { normalizeDate } from '../utils/utils';
 export enum PayoutPurposetype {
@@ -9,25 +16,14 @@ export enum PayoutPurposetype {
   utilityBill = 'utility bill',
   vendorBill = 'vendor bill',
 }
-export enum PayoutStatustype {
-  queued = 'queued',
-  pending = 'pending',
-  rejected = 'rejected',
-  processing = 'processing',
-  processed = 'processed',
-  cancelled = 'cancelled',
-  reversed = 'reversed',
-}
 
-type CurrencyType = 'INR';
-type PayoutMode = 'NEFT' | 'RTGS' | 'IMPS';
 type FetchAllPayoutMode = 'NEFT' | 'RTGS' | 'IMPS' | 'UPI' | 'amazonpay';
 export interface CreatePayoutParams {
   account_number: string;
   fund_account_id: string;
   amount: number;
   currency: CurrencyType;
-  mode: PayoutMode;
+  mode: TransactionMode;
   purpose: PayoutPurposetype;
   queue_if_low_balance?: boolean;
   reference_id?: string;
@@ -44,9 +40,9 @@ export interface Payout {
   notes: Notes;
   fees: number;
   tax: number;
-  status: PayoutStatustype;
+  status: TransactionStatus;
   utr: string;
-  mode: PayoutMode;
+  mode: TransactionMode;
   purpose: PayoutPurposetype;
   reference_id: string;
   narration?: string;
@@ -59,14 +55,9 @@ export interface FetchAllPayoutParams extends FetchQueryParams {
   fund_account_id?: string;
   mode?: FetchAllPayoutMode;
   reference_id?: string;
-  status?: PayoutStatustype;
+  status?: TransactionStatus;
 }
 
-export interface FetchAllResponse<Type> {
-  entity: string;
-  count: number;
-  items: Type[];
-}
 export default function payout(axiosClient: AxiosClient) {
   const BASE_URL = '/payouts';
   return {

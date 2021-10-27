@@ -1,6 +1,6 @@
 import { assert } from 'chai';
-import mock, { MockResponse } from './mocker';
-import razorpayx from './razorpayx';
+import mock, { MockResponse } from './utils/mocker';
+import razorpayx from './utils/razorpayx';
 import equal from 'deep-equal';
 import { FetchContactQueryParams } from '../src/resources/contacts';
 import { getDateInSecs } from '../src/utils/utils';

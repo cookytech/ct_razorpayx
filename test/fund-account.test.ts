@@ -1,11 +1,9 @@
-import { assert } from 'chai';
-import mock, { MockResponse } from './mocker';
-import razorpayx from './razorpayx';
+import {assert} from 'chai';
 import equal from 'deep-equal';
-import { CreateContactParams, FetchContactQueryParams } from '../src/resources/contacts';
-import querystring from 'querystring';
-import { getDateInSecs } from '../src/utils/utils';
-import { AccountType, CreateFundAccountParams, FetchAllFundAccountParms } from '../src/resources/fund-account';
+import {AccountType, CreateFundAccountParams, FetchAllFundAccountParms} from '../src/resources/fund-account';
+import {getDateInSecs} from '../src/utils/utils';
+import mock, {MockResponse} from './utils/mocker';
+import razorpayx from './utils/razorpayx';
 
 describe('Fund Account', () => {
   it('Create fund Account', async () => {
