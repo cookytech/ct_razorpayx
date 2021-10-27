@@ -18,7 +18,7 @@ import RazorpayxError from './utils/razorpayx_error';
  */
 class Razorpayx {
   static VERSION = npmPackage.version || '1.0.0';
-  static PACKAGE_NAME = npmPackage.name || 'ctrazorpayx';
+  static PACKAGE_NAME = npmPackage.name || 'ct_razorpayx';
   contacts: ReturnType<typeof Contacts>;
   fundAccount: ReturnType<typeof FundAccount>;
   payout: ReturnType<typeof Payout>;

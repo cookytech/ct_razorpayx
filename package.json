@@ -1,9 +1,9 @@
 {
-  "name": "ctrazorpayx",
+  "name": "ct_razorpayx",
   "version": "0.0.1",
-  "description": "Package for razorpayx",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "description": "Unofficial package for Razorpayx API.",
+  "main": "lib/src/razorpayx.js",
+  "types": "lib/src/razorpayx.d.ts",
   "scripts": {
     "test": "mocha -r ts-node/register test/**/*.test.ts",
     "build": "tsc",
@@ -45,5 +45,9 @@
   },
   "files": [
     "lib/**/*"
-  ]
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cookytech/ct_razorpayx"
+  }
 }
