@@ -1,5 +1,6 @@
 import { CurrencyType, FetchAllResponse, FetchAllQueryParams, Notes } from '../types/types';
 import AxiosClient from '../utils/axios-client';
+import RazorpayxError from '../utils/razorpayx_error';
 import { normalizeDate } from '../utils/utils';
 import { PayoutPurposetype } from './payout';
 
@@ -81,10 +82,10 @@ export default function payoutLink(axiosClient: AxiosClient) {
       const contact = params.contact;
       if (!contact.id) {
         if (!contact.name) {
-          throw new Error('`contact name` is required if not providing id');
+          throw new RazorpayxError('`contact name` is required if not providing id');
         }
         if (!contact.email && !contact.contact) {
-          throw new Error('either contact or email mandatory if id is not used');
+          throw new RazorpayxError('either contact or email mandatory if id is not used');
         }
       }
       let expire_by = params.expire_by;
@@ -103,7 +104,7 @@ export default function payoutLink(axiosClient: AxiosClient) {
      */
     async cancelPayoutLink(payoutLinkId: string) {
       if (!payoutLinkId) {
-        throw new Error('`payoutLinkId` is missing');
+        throw new RazorpayxError('`payoutLinkId` is missing');
       }
       let url = `${BASE_URL}/${payoutLinkId}/cancel`;
       return axiosClient.post<PayoutLink>({ url });
@@ -119,7 +120,7 @@ export default function payoutLink(axiosClient: AxiosClient) {
       let { from, to, count, skip } = params;
       let url = `${BASE_URL}`;
       if (count && count > 100) {
-        throw new Error('`count` can be maximum of 100');
+        throw new RazorpayxError('`count` can be maximum of 100');
       }
       if (from) {
         from = normalizeDate(from);
@@ -141,7 +142,7 @@ export default function payoutLink(axiosClient: AxiosClient) {
      */
     async fetch(payoutLinkId: string) {
       if (!payoutLinkId) {
-        throw new Error('`payoutLinkId` is missing');
+        throw new RazorpayxError('`payoutLinkId` is missing');
       }
       let url = `${BASE_URL}/${payoutLinkId}`;
       return axiosClient.get<PayoutLink>({ url });

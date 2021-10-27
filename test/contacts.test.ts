@@ -1,8 +1,9 @@
-import {assert} from 'chai';
+import { AxiosResponse } from 'axios';
+import { assert } from 'chai';
 import equal from 'deep-equal';
-import {CreateContactParams, FetchContactQueryParams} from '../src/resources/contacts';
-import {getDateInSecs} from '../src/utils/utils';
-import mock, {MockResponse} from './utils/mocker';
+import { CreateContactParams, FetchContactQueryParams } from '../src/resources/contacts';
+import { getDateInSecs } from '../src/utils/utils';
+import mock, { MockResponse } from './utils/mocker';
 import razorpayx from './utils/razorpayx';
 
 describe('Contacts', () => {

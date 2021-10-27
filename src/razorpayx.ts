@@ -5,7 +5,17 @@ import Payout from './resources/payout';
 import Transaction from './resources/transactions';
 import PayoutLink from './resources/payout-link';
 import AxiosClient from './utils/axios-client';
+import { Headers } from './types/types';
+import RazorpayxError from './utils/razorpayx_error';
 
+/**
+ * https://razorpay.com/docs/razorpayx/api/
+ *
+ * Post sign up, account activation and KYC verification you are eligible to make payouts. To make a payout, you must:
+ ** Create a Contact.
+ ** Add a Fund Account for a contact.
+ ** Create a Payout.
+ */
 class Razorpayx {
   static VERSION = npmPackage.version || '1.0.0';
   static PACKAGE_NAME = npmPackage.name || 'ctrazorpayx';
@@ -14,20 +24,15 @@ class Razorpayx {
   payout: ReturnType<typeof Payout>;
   transaction: ReturnType<typeof Transaction>;
   payoutLink: ReturnType<typeof PayoutLink>;
-  constructor(
-    options: { key_id: string; key_secret: string; headers?: { [key: string]: string } } = {
-      key_id: '',
-      key_secret: '',
-    },
-  ) {
+  constructor(options: { key_id: string; key_secret: string; headers?: Headers }) {
     const { key_id, key_secret, headers } = options;
 
     if (!key_id) {
-      throw new Error('`key_id` is mandatory');
+      throw new RazorpayxError('`key_id` is mandatory');
     }
 
     if (!key_secret) {
-      throw new Error('`key_secret` is mandatory');
+      throw new RazorpayxError('`key_secret` is mandatory');
     }
 
     const axiosClient = new AxiosClient({

@@ -7,6 +7,7 @@ import {
   TransactionStatus,
 } from '../types/types';
 import AxiosClient from '../utils/axios-client';
+import RazorpayxError from '../utils/razorpayx_error';
 import { normalizeDate } from '../utils/utils';
 
 export interface Transaction {
@@ -53,7 +54,7 @@ export default function transactions(axiosClient: AxiosClient) {
       let { from, to, count, skip } = params;
       const url = `${BASE_URL}?account_number=${accountNumber}`;
       if (count && count > 100) {
-        throw new Error('`count` can be maximum of 100');
+        throw new RazorpayxError('`count` can be maximum of 100');
       }
       if (from) {
         from = normalizeDate(from);
@@ -75,7 +76,7 @@ export default function transactions(axiosClient: AxiosClient) {
      */
     async fetch(transactionId: string) {
       if (!transactionId) {
-        throw new Error('`transactionId` is missing');
+        throw new RazorpayxError('`transactionId` is missing');
       }
       let url = `${BASE_URL}/${transactionId}`;
       return axiosClient.get<Transaction>({ url });

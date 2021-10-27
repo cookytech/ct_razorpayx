@@ -1,5 +1,6 @@
 import { FetchAllResponse, FetchAllQueryParams, Notes } from '../types/types';
 import AxiosClient from '../utils/axios-client';
+import RazorpayxError from '../utils/razorpayx_error';
 import { normalizeDate } from '../utils/utils';
 
 export enum UserType {
@@ -76,7 +77,7 @@ export default function contacts(axiosClient: AxiosClient) {
      */
     async update(contactId: string, params: UpdateContactParams) {
       if (!contactId) {
-        throw new Error('`contactId` is missing');
+        throw new RazorpayxError('`contactId` is missing');
       }
       let url = `${BASE_URL}/${contactId}`;
       return axiosClient.patch<Contact>({ url, data: params });
@@ -98,10 +99,10 @@ export default function contacts(axiosClient: AxiosClient) {
      */
     async toggleActiveContact(contactId: string, active: boolean) {
       if (!contactId) {
-        throw new Error('`contactId` is missing');
+        throw new RazorpayxError('`contactId` is missing');
       }
       if (active == undefined) {
-        throw new Error('`active` is missing');
+        throw new RazorpayxError('`active` is missing');
       }
       return axiosClient.patch<Contact>({ url: `/contacts/${contactId}`, data: { active } });
     },
@@ -116,7 +117,7 @@ export default function contacts(axiosClient: AxiosClient) {
       let { from, to, count, skip } = params,
         url = BASE_URL;
       if (count && count > 100) {
-        throw new Error('`count` can be maximum of 100');
+        throw new RazorpayxError('`count` can be maximum of 100');
       }
       if (from) {
         from = normalizeDate(from);
@@ -138,7 +139,7 @@ export default function contacts(axiosClient: AxiosClient) {
      */
     async fetch(contactId: string) {
       if (!contactId) {
-        throw new Error('`contactId` is missing');
+        throw new RazorpayxError('`contactId` is missing');
       }
       let url = `${BASE_URL}/${contactId}`;
       return axiosClient.get<Contact>({ url });

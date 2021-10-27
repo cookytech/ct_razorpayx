@@ -25,3 +25,4 @@ export interface FetchAllResponse<Type> {
   count: number;
   items: Type[];
 }
+export type Headers = { [key: string]: string };

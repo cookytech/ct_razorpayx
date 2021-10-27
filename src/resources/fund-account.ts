@@ -1,5 +1,6 @@
 import { FetchAllResponse, FetchAllQueryParams } from '../types/types';
 import AxiosClient from '../utils/axios-client';
+import RazorpayxError from '../utils/razorpayx_error';
 import { normalizeDate } from '../utils/utils';
 
 export interface CreateFundAccountParams {
@@ -72,22 +73,22 @@ export default function fundAccount(axiosClient: AxiosClient) {
       switch (params.account_type) {
         case AccountType.vpa:
           if (!params.vpa) {
-            throw new Error('`vpa` is missing');
+            throw new RazorpayxError('`vpa` is missing');
           }
           break;
         case AccountType.card:
           if (!params.card) {
-            throw new Error('`card` is missing');
+            throw new RazorpayxError('`card` is missing');
           }
           break;
         case AccountType.bankAccount:
           if (!params.bank_account) {
-            throw new Error('`bank_account` is missing');
+            throw new RazorpayxError('`bank_account` is missing');
           }
           break;
         case AccountType.wallet:
           if (!params.wallet) {
-            throw new Error('`wallet` is missing');
+            throw new RazorpayxError('`wallet` is missing');
           }
           break;
         default:
@@ -114,10 +115,10 @@ export default function fundAccount(axiosClient: AxiosClient) {
      */
     async toggleActiveFundAccount(fundAccountId: string, active: boolean) {
       if (!fundAccountId) {
-        throw new Error('`fundAccountId` is missing');
+        throw new RazorpayxError('`fundAccountId` is missing');
       }
       if (active == undefined) {
-        throw new Error('`active` is missing');
+        throw new RazorpayxError('`active` is missing');
       }
       let url = `${BASE_URL}/${fundAccountId}`;
       return axiosClient.patch<FundAccount>({ url, data: { active } });
@@ -133,7 +134,7 @@ export default function fundAccount(axiosClient: AxiosClient) {
       let { from, to, count, skip } = params,
         url = BASE_URL;
       if (count && count > 100) {
-        throw new Error('`count` can be maximum of 100');
+        throw new RazorpayxError('`count` can be maximum of 100');
       }
       if (from) {
         from = normalizeDate(from);
@@ -155,7 +156,7 @@ export default function fundAccount(axiosClient: AxiosClient) {
      */
     async fetch(fundAccountId: string) {
       if (!fundAccountId) {
-        throw new Error('`fundAccountId` is missing');
+        throw new RazorpayxError('`fundAccountId` is missing');
       }
       let url = `${BASE_URL}/${fundAccountId}`;
       return axiosClient.get<FundAccount>({ url });

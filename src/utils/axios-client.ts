@@ -1,15 +1,16 @@
 'use strict';
 
 import axios, { AxiosError, AxiosInstance } from 'axios';
+import { Headers } from '../types/types';
+import RazorpayxError, { RazorpayxErrorInfo, RazorpayxErrorResponse } from './razorpayx_error';
 import { isNonNullObject } from './utils';
-
 
 const allowedHeaders = {
   'X-Razorpay-Account': '',
 };
 
-function getValidHeaders(headers?: { [key: string]: string }) {
-  const result: { [key: string]: string } = {};
+function getValidHeaders(headers?: Headers) {
+  const result: Headers = {};
 
   if (!headers || !isNonNullObject(headers)) {
     return result;
@@ -26,13 +27,7 @@ function getValidHeaders(headers?: { [key: string]: string }) {
 
 class AxiosClient {
   axiosInstance: AxiosInstance;
-  constructor(options: {
-    hostUrl?: string;
-    ua: string;
-    key_id: string;
-    key_secret: string;
-    headers?: { [key: string]: string };
-  }) {
+  constructor(options: { hostUrl?: string; ua: string; key_id: string; key_secret: string; headers?: Headers }) {
     this.axiosInstance = axios.create({
       baseURL: options.hostUrl,
       headers: { 'User-Agent': options.ua, ...getValidHeaders(options.headers) },
@@ -44,15 +39,36 @@ class AxiosClient {
   }
 
   async get<ResponseType = any>(params: { url: string; data?: any }) {
-    return await this.axiosInstance.get<ResponseType>(params.url, { params: params.data });
+    try {
+      return await this.axiosInstance.get<ResponseType>(params.url, { params: params.data });
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        onError(<AxiosError<RazorpayxErrorResponse>>error);
+      }
+    }
   }
 
   async post<ResponseType = any>(params: { url: string; data?: any }) {
-    return await this.axiosInstance.post<ResponseType>(params.url, params.data);
+    try {
+      return await this.axiosInstance.post<ResponseType>(params.url, params.data);
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        onError(<AxiosError<RazorpayxErrorResponse>>error);
+      }
+    }
   }
   async patch<ResponseType = any>(params: { url: string; data: any }) {
-    return await this.axiosInstance.patch<ResponseType>(params.url, params.data);
+    try {
+      return await this.axiosInstance.patch<ResponseType>(params.url, params.data);
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        onError(<AxiosError<RazorpayxErrorResponse>>error);
+      }
+    }
   }
+}
+function onError(error: AxiosError<RazorpayxErrorResponse>) {
+  throw new RazorpayxError('Razorpayx API Error', error.response?.data.error, error.response?.status);
 }
 
 export default AxiosClient;

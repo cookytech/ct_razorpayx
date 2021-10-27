@@ -17,8 +17,11 @@
   },
   "keywords": [
     "razorpayx",
-    "razorpay",
-    "payout"
+    "razorpayx-sdk",
+    "payout",
+    "nodejs",
+    "ctrazorpayx-sdk",
+    "razorpayx-nodejs"
   ],
   "author": "Cookytech",
   "license": "ISC",

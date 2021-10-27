@@ -7,6 +7,7 @@ import {
   TransactionStatus,
 } from '../types/types';
 import AxiosClient from '../utils/axios-client';
+import RazorpayxError from '../utils/razorpayx_error';
 import { normalizeDate } from '../utils/utils';
 export enum PayoutPurposetype {
   refund = 'refund',
@@ -81,7 +82,7 @@ export default function payout(axiosClient: AxiosClient) {
      */
     async cancelQueuedPayout(payoutId: string) {
       if (!payoutId) {
-        throw new Error('`payoutId` is missing');
+        throw new RazorpayxError('`payoutId` is missing');
       }
       let url = `${BASE_URL}/${payoutId}/cancel`;
       return axiosClient.post<Payout>({ url });
@@ -95,12 +96,12 @@ export default function payout(axiosClient: AxiosClient) {
      */
     async fetchAll(accountNumber: string, params: FetchAllPayoutParams) {
       if (!accountNumber) {
-        throw new Error('`accountNumber` is missing');
+        throw new RazorpayxError('`accountNumber` is missing');
       }
       let { from, to, count, skip } = params;
       let url = `${BASE_URL}?account_number=${accountNumber}`;
       if (count && count > 100) {
-        throw new Error('`count` can be maximum of 100');
+        throw new RazorpayxError('`count` can be maximum of 100');
       }
       if (from) {
         from = normalizeDate(from);
@@ -122,7 +123,7 @@ export default function payout(axiosClient: AxiosClient) {
      */
     async fetch(payoutId: string) {
       if (!payoutId) {
-        throw new Error('`payoutId` is missing');
+        throw new RazorpayxError('`payoutId` is missing');
       }
       let url = `${BASE_URL}/${payoutId}`;
       return axiosClient.get<Payout>({ url });
