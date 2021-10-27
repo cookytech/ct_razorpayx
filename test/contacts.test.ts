@@ -33,7 +33,7 @@ describe('Contacts', () => {
     });
 
     const response = await razorpayx.contacts.create(params);
-    const data = response.data as any as MockResponse;
+    const data = response?.data as any as MockResponse;
     assert.equal(data.__JUST_FOR_TESTS__.url, '/v1/contacts', 'Create Contact request url formed');
     assert.ok(equal(data.__JUST_FOR_TESTS__.requestBody, expectedParams), 'All params are passed in request body');
   });
@@ -65,7 +65,7 @@ describe('Contacts', () => {
     });
 
     const response = await razorpayx.contacts.update(contactId, params);
-    const data = response.data as any as MockResponse;
+    const data = response?.data as any as MockResponse;
     assert.equal(data.__JUST_FOR_TESTS__.url, `/v1/contacts/${contactId}`, 'Update Contact request url formed');
     assert.ok(equal(data.__JUST_FOR_TESTS__.requestBody, expectedParams), 'All params are passed in request body');
   });
@@ -81,7 +81,7 @@ describe('Contacts', () => {
     });
 
     const response = await razorpayx.contacts.toggleActiveContact('1', active);
-    const data = response.data as any as MockResponse;
+    const data = response?.data as any as MockResponse;
     assert.equal(data.__JUST_FOR_TESTS__.url, '/v1/contacts/1', 'Toggle Active Contact request url formed');
     assert.ok(equal(data.__JUST_FOR_TESTS__.requestBody, expectedParams), 'All params are passed in request body');
   });
@@ -113,7 +113,7 @@ describe('Contacts', () => {
       method: 'GET',
     });
     const response = await razorpayx.contacts.fetchAll(params);
-    const data = response.data as any as MockResponse;
+    const data = response?.data as any as MockResponse;
     const expectedUrl = `/v1/contacts?name=${params.name}&from=${fromDateInSec}&to=${toDateInSec}&count=${params.count}&skip=${params.skip}`;
     assert.equal(data.__JUST_FOR_TESTS__.url, expectedUrl, 'Fetch All Contacts request url formed');
     assert.ok(
@@ -129,7 +129,7 @@ describe('Contacts', () => {
     });
 
     const response = await razorpayx.contacts.fetch(contactId);
-    const data = response.data as any as MockResponse;
+    const data = response?.data as any as MockResponse;
     assert.equal(data.__JUST_FOR_TESTS__.url, `/v1/contacts/${contactId}`, 'Fetch a Contact request url formed');
   });
 });

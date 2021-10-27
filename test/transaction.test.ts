@@ -35,7 +35,7 @@ describe('Transaction', () => {
       method: 'GET',
     });
     const response = await razorpayx.transaction.fetchAll(accountNumber, params);
-    const data = response.data as any as MockResponse;
+    const data = response?.data as any as MockResponse;
     const expectedUrl = `/v1/transactions?account_number=${accountNumber}&from=${fromDateInSec}&to=${toDateInSec}&count=${params.count}&skip=${params.skip}`;
     assert.equal(data.__JUST_FOR_TESTS__.url, expectedUrl, 'Fetch All Transaction request url formed');
     assert.ok(
@@ -51,7 +51,7 @@ describe('Transaction', () => {
     });
 
     const response = await razorpayx.transaction.fetch(transactionId);
-    const data = response.data as any as MockResponse;
+    const data = response?.data as any as MockResponse;
     assert.equal(
       data.__JUST_FOR_TESTS__.url,
       `/v1/transactions/${transactionId}`,
