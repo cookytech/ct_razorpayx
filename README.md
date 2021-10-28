@@ -1,5 +1,10 @@
 # Razorpayx Node SDK
 
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/cookytech/ct_razorpayx/npm-publish)  ![GitHub Release Date](https://img.shields.io/github/release-date/cookytech/ct_razorpayx)  ![npm (tag)](https://img.shields.io/npm/v/ct_razorpayx/latest)
+ ![GitHub top language](https://img.shields.io/github/languages/top/cookytech/ct_razorpayx)  ![GitHub](https://img.shields.io/github/license/cookytech/ct_razorpayx)
+
+
+
 Unofficial nodejs library for [Razorpayx API](https://razorpay.com/docs/razorpayx/api)
 
 Read up here for getting started and understanding the payout flow with Razorpayx: <https://razorpay.com/docs/razorpayx/api/get-started/>
@@ -33,7 +38,7 @@ Note: If you are an existing Razorpay merchant, you can use your existing API ke
 ```
 To generate your API Keys:
 
-1. Log into your RazorpayX Dashboard.
+1. Log into your [RazorpayX Dashboard](https://x.razorpay.com/).
 2. Navigate to Account Settings → API Keys and Webhooks.
 3. Click Generate Key.
 4. API Keys are generated for your business account.
@@ -52,23 +57,30 @@ instance.contacts.fetch(contactId);
 
 ## Development
 
+Using `npm`
 ```bash
 npm install
+```
+Using `yarn`
+```bash
+yarn install
 ```
 
 ## Testing
 
+Using `npm`
 ```bash
 npm test
 ```
+Using `yarn`
+```bash
+yarn test
+```
 ## Release
-
 1. Switch to the `main` branch. Make sure you have the latest changes in the local main
 2. Update the `CHANGELOG.md` & bump the version in `package.json`
-3. Commit
-4. Tag the release & push it to Github
-5. Create a release on GitHub using the website with more details about the release
-6. Publish to npm with the `npm publish` command
+3. Commit & push it to Github
+4. Create a tag & release on GitHub using the website with more details about the release
 ## Licence
 
 MIT Licensed. See [LICENSE](LICENSE) for more details

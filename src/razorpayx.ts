@@ -7,6 +7,7 @@ import PayoutLink from './resources/payout-link';
 import AxiosClient from './utils/axios-client';
 import { Headers } from './types/types';
 import RazorpayxError from './utils/razorpayx_error';
+import { validateWebhookSignature } from './utils/utils';
 
 /**
  * https://razorpay.com/docs/razorpayx/api/
@@ -24,6 +25,9 @@ class Razorpayx {
   payout: ReturnType<typeof Payout>;
   transaction: ReturnType<typeof Transaction>;
   payoutLink: ReturnType<typeof PayoutLink>;
+  static validateWebhookSignature(body: string, signature: string, secret: string) {
+    return validateWebhookSignature(body, signature, secret);
+  }
   constructor(options: { key_id: string; key_secret: string; headers?: Headers }) {
     const { key_id, key_secret, headers } = options;
 
