@@ -1,10 +1,19 @@
 # Razorpayx Node SDK
 
-Unofficial nodejs library for [Razorpayx API](https://razorpay.com/docs/razorpayx/api/).
+Unofficial nodejs library for [Razorpayx API](https://razorpay.com/docs/razorpayx/api)
 
 Read up here for getting started and understanding the payout flow with Razorpayx: <https://razorpay.com/docs/razorpayx/api/get-started/>
 
+## Installation
+Using `npm`
 
+```bash
+npm i ct_razorpayx
+```
+Using `yarn`
+```bash
+yarn add ct_razorpayx
+```
 ## Documentation
 
 Documentation of Razorpay's API and their usage is available at <https://razorpay.com/docs/razorpayx/api/>
@@ -40,3 +49,26 @@ The resources can be accessed via the instance. All the methods invocations foll
 // example
 instance.contacts.fetch(contactId);
 ```
+
+## Development
+
+```bash
+npm install
+```
+
+## Testing
+
+```bash
+npm test
+```
+## Release
+
+1. Switch to the `main` branch. Make sure you have the latest changes in the local main
+2. Update the `CHANGELOG.md` & bump the version in `package.json`
+3. Commit
+4. Tag the release & push it to Github
+5. Create a release on GitHub using the website with more details about the release
+6. Publish to npm with the `npm publish` command
+## Licence
+
+MIT Licensed. See [LICENSE](LICENSE) for more details
