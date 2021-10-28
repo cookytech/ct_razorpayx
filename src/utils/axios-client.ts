@@ -2,7 +2,7 @@
 
 import axios, { AxiosError, AxiosInstance } from 'axios';
 import { Headers } from '../types/types';
-import RazorpayxError, { RazorpayxErrorInfo, RazorpayxErrorResponse } from './razorpayx_error';
+import RazorpayxError, { RazorpayxErrorResponse } from './razorpayx_error';
 import { isNonNullObject } from './utils';
 
 const allowedHeaders = {

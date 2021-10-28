@@ -70,7 +70,7 @@ export default function contacts(axiosClient: AxiosClient) {
     /**
      * Update details for an existing contact. Only send parameters you want to change in the request body.
      *
-     * DOCS: https://razorpay.com/docs/razorpayx/api/contacts/#update-a-contact
+     * https://razorpay.com/docs/razorpayx/api/contacts/#update-a-contact
      * @param contactId The unique identifier linked to the contact. For example, `cont_00000000000001`
      * @param params Update Contact Parameters
      * @returns
@@ -85,7 +85,7 @@ export default function contacts(axiosClient: AxiosClient) {
     /**
      * Activate or deactivate a contact. This helps you block payouts to certain contacts, as and when required.
      *
-     * DOCS: https://razorpay.com/docs/razorpayx/api/contacts/#activate-or-deactivate-a-contact
+     * https://razorpay.com/docs/razorpayx/api/contacts/#activate-or-deactivate-a-contact
      * @param contactId The unique identifier linked to the contact. For example, `cont_00000000000001`
      * @param active The state to which you want to move the contact.
      * A contact can have the following two states:
@@ -109,7 +109,7 @@ export default function contacts(axiosClient: AxiosClient) {
     /**
      * Fetch details of all contacts.
      *
-     * DOCS: https://razorpay.com/docs/razorpayx/api/contacts/#fetch-all-contacts
+     * https://razorpay.com/docs/razorpayx/api/contacts/#fetch-all-contacts
      * @param params query paramaters {@link FetchContactQueryParams}
      * @returns
      */
@@ -133,7 +133,7 @@ export default function contacts(axiosClient: AxiosClient) {
     /**
      * Fetch details of a specific contact.
      *
-     * DOCS: https://razorpay.com/docs/razorpayx/api/contacts/#fetch-a-contact-by-id
+     * https://razorpay.com/docs/razorpayx/api/contacts/#fetch-a-contact-by-id
      * @param contactId The unique identifier linked to the contact. For example, `cont_00000000000001`
      * @returns The Specific Contact {@link Contact}
      */
