@@ -13,11 +13,11 @@ Read up here for getting started and understanding the payout flow with Razorpay
 Using `npm`
 
 ```bash
-npm i ct_razorpayx
+npm i ct-razorpayx
 ```
 Using `yarn`
 ```bash
-yarn add ct_razorpayx
+yarn add ct-razorpayx
 ```
 ## Documentation
 

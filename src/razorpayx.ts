@@ -19,7 +19,7 @@ import { validateWebhookSignature } from './utils/utils';
  */
 class Razorpayx {
   static VERSION = npmPackage.version || '0.0.1';
-  static PACKAGE_NAME = npmPackage.name || 'ct_razorpayx';
+  static PACKAGE_NAME = npmPackage.name || 'ct-razorpayx';
   contacts: ReturnType<typeof Contacts>;
   fundAccount: ReturnType<typeof FundAccount>;
   payout: ReturnType<typeof Payout>;
