@@ -17,7 +17,7 @@ import RazorpayxError from './utils/razorpayx_error';
  ** Create a Payout.
  */
 class Razorpayx {
-  static VERSION = npmPackage.version || '1.0.0';
+  static VERSION = npmPackage.version || '0.0.1';
   static PACKAGE_NAME = npmPackage.name || 'ct_razorpayx';
   contacts: ReturnType<typeof Contacts>;
   fundAccount: ReturnType<typeof FundAccount>;
