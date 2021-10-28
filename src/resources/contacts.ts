@@ -64,7 +64,7 @@ export default function contacts(axiosClient: AxiosClient) {
      * @returns
      */
     async create(params: CreateContactParams) {
-      let url = BASE_URL;
+      const url = BASE_URL;
       return axiosClient.post<Contact>({ url, data: params });
     },
     /**
@@ -79,7 +79,7 @@ export default function contacts(axiosClient: AxiosClient) {
       if (!contactId) {
         throw new RazorpayxError('`contactId` is missing');
       }
-      let url = `${BASE_URL}/${contactId}`;
+      const url = `${BASE_URL}/${contactId}`;
       return axiosClient.patch<Contact>({ url, data: params });
     },
     /**
@@ -101,7 +101,7 @@ export default function contacts(axiosClient: AxiosClient) {
       if (!contactId) {
         throw new RazorpayxError('`contactId` is missing');
       }
-      if (active == undefined) {
+      if (active === undefined) {
         throw new RazorpayxError('`active` is missing');
       }
       return axiosClient.patch<Contact>({ url: `/contacts/${contactId}`, data: { active } });
@@ -114,8 +114,8 @@ export default function contacts(axiosClient: AxiosClient) {
      * @returns
      */
     async fetchAll(params: FetchContactQueryParams) {
-      let { from, to, count, skip } = params,
-        url = BASE_URL;
+      let { from, to, count, skip } = params;
+      const url = BASE_URL;
       if (count && count > 100) {
         throw new RazorpayxError('`count` can be maximum of 100');
       }
@@ -141,7 +141,7 @@ export default function contacts(axiosClient: AxiosClient) {
       if (!contactId) {
         throw new RazorpayxError('`contactId` is missing');
       }
-      let url = `${BASE_URL}/${contactId}`;
+      const url = `${BASE_URL}/${contactId}`;
       return axiosClient.get<Contact>({ url });
     },
   };

@@ -70,7 +70,7 @@ export default function payout(axiosClient: AxiosClient) {
      * @returns
      */
     async create(params: CreatePayoutParams) {
-      let url = BASE_URL;
+      const url = BASE_URL;
       return axiosClient.post<Payout>({ url, data: params });
     },
     /**
@@ -84,7 +84,7 @@ export default function payout(axiosClient: AxiosClient) {
       if (!payoutId) {
         throw new RazorpayxError('`payoutId` is missing');
       }
-      let url = `${BASE_URL}/${payoutId}/cancel`;
+      const url = `${BASE_URL}/${payoutId}/cancel`;
       return axiosClient.post<Payout>({ url });
     },
     /**
@@ -99,7 +99,7 @@ export default function payout(axiosClient: AxiosClient) {
         throw new RazorpayxError('`accountNumber` is missing');
       }
       let { from, to, count, skip } = params;
-      let url = `${BASE_URL}?account_number=${accountNumber}`;
+      const url = `${BASE_URL}?account_number=${accountNumber}`;
       if (count && count > 100) {
         throw new RazorpayxError('`count` can be maximum of 100');
       }
@@ -125,7 +125,7 @@ export default function payout(axiosClient: AxiosClient) {
       if (!payoutId) {
         throw new RazorpayxError('`payoutId` is missing');
       }
-      let url = `${BASE_URL}/${payoutId}`;
+      const url = `${BASE_URL}/${payoutId}`;
       return axiosClient.get<Payout>({ url });
     },
   };

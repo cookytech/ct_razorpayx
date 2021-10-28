@@ -12,9 +12,9 @@ import RazorpayxError from './utils/razorpayx_error';
  * https://razorpay.com/docs/razorpayx/api/
  *
  * Post sign up, account activation and KYC verification you are eligible to make payouts. To make a payout, you must:
- ** Create a Contact.
- ** Add a Fund Account for a contact.
- ** Create a Payout.
+ * * Create a Contact.
+ * * Add a Fund Account for a contact.
+ * * Create a Payout.
  */
 class Razorpayx {
   static VERSION = npmPackage.version || '0.0.1';

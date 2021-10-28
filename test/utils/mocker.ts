@@ -22,7 +22,7 @@ const FIXTURES = {
   },
 };
 
-export const mock = function (params: any) {
+export const mock = (params: any) => {
   const host = 'https://api.razorpay.com';
   const version = 'v1';
   const { url, method = 'GET', requestBody, replyWithError } = params;
@@ -35,7 +35,7 @@ export const mock = function (params: any) {
       requestQueryParams = qp;
       return true;
     })
-    .reply(status, function (url, requestBody) {
+    .reply(status, function (_, __) {
       if (replyWithError) {
         return FIXTURES.error;
       }
@@ -46,14 +46,14 @@ export const mock = function (params: any) {
           url,
           method,
           requestQueryParams,
-          requestBody: requestBody,
+          requestBody,
           headers: this.req.headers,
         },
       };
     });
 };
 
-const normalizeUrl = function (url: string) {
+const normalizeUrl = (url: string) => {
   return url.replace(/\/{2,}/g, '/');
 };
 

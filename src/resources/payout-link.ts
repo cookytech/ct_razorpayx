@@ -92,7 +92,7 @@ export default function payoutLink(axiosClient: AxiosClient) {
       if (expire_by) {
         expire_by = normalizeDate(expire_by);
       }
-      let url = BASE_URL;
+      const url = BASE_URL;
       return axiosClient.post<PayoutLink>({ url, data: { ...params, expire_by } });
     },
     /**
@@ -106,7 +106,7 @@ export default function payoutLink(axiosClient: AxiosClient) {
       if (!payoutLinkId) {
         throw new RazorpayxError('`payoutLinkId` is missing');
       }
-      let url = `${BASE_URL}/${payoutLinkId}/cancel`;
+      const url = `${BASE_URL}/${payoutLinkId}/cancel`;
       return axiosClient.post<PayoutLink>({ url });
     },
     /**
@@ -118,7 +118,7 @@ export default function payoutLink(axiosClient: AxiosClient) {
      */
     async fetchAll(params: FetchAllPayoutLinkParams) {
       let { from, to, count, skip } = params;
-      let url = `${BASE_URL}`;
+      const url = `${BASE_URL}`;
       if (count && count > 100) {
         throw new RazorpayxError('`count` can be maximum of 100');
       }
@@ -144,7 +144,7 @@ export default function payoutLink(axiosClient: AxiosClient) {
       if (!payoutLinkId) {
         throw new RazorpayxError('`payoutLinkId` is missing');
       }
-      let url = `${BASE_URL}/${payoutLinkId}`;
+      const url = `${BASE_URL}/${payoutLinkId}`;
       return axiosClient.get<PayoutLink>({ url });
     },
   };

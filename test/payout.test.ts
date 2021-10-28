@@ -8,7 +8,7 @@ import { CreatePayoutParams, FetchAllPayoutParams, PayoutPurposetype } from '../
 
 describe('Payout', () => {
   it('Create Payout', async () => {
-    let params: CreatePayoutParams = {
+    const params: CreatePayoutParams = {
       account_number: '1234',
       fund_account_id: 'fa_1234',
       amount: 1000,
@@ -17,7 +17,7 @@ describe('Payout', () => {
       purpose: PayoutPurposetype.cashback,
     };
 
-    let expectedParams: CreatePayoutParams = {
+    const expectedParams: CreatePayoutParams = {
       ...params,
     };
     mock({
@@ -54,7 +54,7 @@ describe('Payout', () => {
     const fromDateInSec = getDateInSecs(fromDate);
     const toDateInSec = getDateInSecs(toDate);
 
-    let params: FetchAllPayoutParams = {
+    const params: FetchAllPayoutParams = {
       reference_id: '1234',
       from: fromDate,
       to: toDateInSec,
@@ -62,7 +62,7 @@ describe('Payout', () => {
       skip: 1,
     };
     const accountNumber = '1234';
-    let expectedParams = {
+    const expectedParams = {
       account_number: accountNumber,
       reference_id: '1234',
       from: fromDateInSec,

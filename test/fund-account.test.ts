@@ -7,13 +7,13 @@ import razorpayx from './utils/razorpayx';
 
 describe('Fund Account', () => {
   it('Create fund Account', async () => {
-    let params: CreateFundAccountParams = {
+    const params: CreateFundAccountParams = {
       account_type: AccountType.vpa,
       contact_id: '1',
       vpa: { address: 'vpaaddress' },
     };
 
-    let expectedParams: CreateFundAccountParams = {
+    const expectedParams: CreateFundAccountParams = {
       account_type: AccountType.vpa,
       contact_id: '1',
       vpa: { address: 'vpaaddress' },
@@ -31,7 +31,7 @@ describe('Fund Account', () => {
   it('Toggle Fund Account', async () => {
     const active = false;
     const fundAccountId = 'fa_1234';
-    let expectedParams = {
+    const expectedParams = {
       active,
     };
 
@@ -57,7 +57,7 @@ describe('Fund Account', () => {
     const fromDateInSec = getDateInSecs(fromDate);
     const toDateInSec = getDateInSecs(toDate);
     const contactId = 'cont_1234';
-    let params: FetchAllFundAccountParms = {
+    const params: FetchAllFundAccountParms = {
       contact_id: contactId,
       from: fromDate,
       to: toDateInSec,
@@ -65,7 +65,7 @@ describe('Fund Account', () => {
       skip: 1,
     };
 
-    let expectedParams: FetchAllFundAccountParms = {
+    const expectedParams: FetchAllFundAccountParms = {
       contact_id: contactId,
       from: fromDateInSec,
       to: toDateInSec,

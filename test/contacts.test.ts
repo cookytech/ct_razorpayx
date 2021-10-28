@@ -8,7 +8,7 @@ import razorpayx from './utils/razorpayx';
 
 describe('Contacts', () => {
   it('Create Contact', async () => {
-    let params: CreateContactParams = {
+    const params: CreateContactParams = {
       name: 'test',
       email: 'test@razorpay.com',
       contact: '123456789',
@@ -18,7 +18,7 @@ describe('Contacts', () => {
       },
     };
 
-    let expectedParams: CreateContactParams = {
+    const expectedParams: CreateContactParams = {
       name: 'test',
       email: 'test@razorpay.com',
       contact: '123456789',
@@ -38,7 +38,7 @@ describe('Contacts', () => {
     assert.ok(equal(data.__JUST_FOR_TESTS__.requestBody, expectedParams), 'All params are passed in request body');
   });
   it('Update Contact', async () => {
-    let params = {
+    const params = {
       name: 'test',
       email: 'test@razorpay.com',
       contact: '123456789',
@@ -48,7 +48,7 @@ describe('Contacts', () => {
       },
     };
 
-    let expectedParams = {
+    const expectedParams = {
       name: 'test',
       email: 'test@razorpay.com',
       contact: '123456789',
@@ -71,7 +71,7 @@ describe('Contacts', () => {
   });
   it('Toggle Active Contact', async () => {
     const active = false;
-    let expectedParams = {
+    const expectedParams = {
       active,
     };
 
@@ -93,7 +93,7 @@ describe('Contacts', () => {
     const fromDateInSec = getDateInSecs(fromDate);
     const toDateInSec = getDateInSecs(toDate);
 
-    let params: FetchContactQueryParams = {
+    const params: FetchContactQueryParams = {
       name: 'test',
       from: fromDate,
       to: toDateInSec,
@@ -101,7 +101,7 @@ describe('Contacts', () => {
       skip: 1,
     };
 
-    let expectedParams: FetchContactQueryParams = {
+    const expectedParams: FetchContactQueryParams = {
       name: 'test',
       from: fromDateInSec,
       to: toDateInSec,

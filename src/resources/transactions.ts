@@ -78,7 +78,7 @@ export default function transactions(axiosClient: AxiosClient) {
       if (!transactionId) {
         throw new RazorpayxError('`transactionId` is missing');
       }
-      let url = `${BASE_URL}/${transactionId}`;
+      const url = `${BASE_URL}/${transactionId}`;
       return axiosClient.get<Transaction>({ url });
     },
   };

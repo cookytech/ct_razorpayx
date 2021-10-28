@@ -16,14 +16,14 @@ describe('Transaction', () => {
     const toDateInSec = getDateInSecs(toDate);
 
     const accountNumber = '1234';
-    let params: FetchAllQueryParams = {
+    const params: FetchAllQueryParams = {
       from: fromDate,
       to: toDateInSec,
       count: 20,
       skip: 1,
     };
 
-    let expectedParams = {
+    const expectedParams = {
       account_number: accountNumber,
       from: fromDateInSec,
       to: toDateInSec,

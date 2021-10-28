@@ -9,7 +9,7 @@ import { CreatePayoutLinkParams, FetchAllPayoutLinkParams } from '../src/resourc
 
 describe('Payout Link', () => {
   it('Create Payout Link', async () => {
-    let params: CreatePayoutLinkParams = {
+    const params: CreatePayoutLinkParams = {
       account_number: '1234',
       amount: 1000,
       currency: 'INR',
@@ -20,7 +20,7 @@ describe('Payout Link', () => {
       },
     };
 
-    let expectedParams: CreatePayoutLinkParams = {
+    const expectedParams: CreatePayoutLinkParams = {
       ...params,
     };
     mock({
@@ -57,7 +57,7 @@ describe('Payout Link', () => {
     const fromDateInSec = getDateInSecs(fromDate);
     const toDateInSec = getDateInSecs(toDate);
     const contactId = 'cont_1234';
-    let params: FetchAllPayoutLinkParams = {
+    const params: FetchAllPayoutLinkParams = {
       contact_id: contactId,
       from: fromDate,
       to: toDateInSec,
@@ -65,7 +65,7 @@ describe('Payout Link', () => {
       skip: 1,
     };
 
-    let expectedParams = {
+    const expectedParams = {
       contact_id: contactId,
       from: fromDateInSec,
       to: toDateInSec,

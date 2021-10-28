@@ -94,7 +94,7 @@ export default function fundAccount(axiosClient: AxiosClient) {
         default:
           break;
       }
-      let url = BASE_URL;
+      const url = BASE_URL;
       return axiosClient.post<FundAccount>({ url, data: params });
     },
     /**
@@ -117,10 +117,10 @@ export default function fundAccount(axiosClient: AxiosClient) {
       if (!fundAccountId) {
         throw new RazorpayxError('`fundAccountId` is missing');
       }
-      if (active == undefined) {
+      if (active === undefined) {
         throw new RazorpayxError('`active` is missing');
       }
-      let url = `${BASE_URL}/${fundAccountId}`;
+      const url = `${BASE_URL}/${fundAccountId}`;
       return axiosClient.patch<FundAccount>({ url, data: { active } });
     },
     /**
@@ -131,8 +131,8 @@ export default function fundAccount(axiosClient: AxiosClient) {
      * @returns
      */
     async fetchAll(params: FetchAllFundAccountParms) {
-      let { from, to, count, skip } = params,
-        url = BASE_URL;
+      let { from, to, count, skip } = params;
+      const url = BASE_URL;
       if (count && count > 100) {
         throw new RazorpayxError('`count` can be maximum of 100');
       }
@@ -158,7 +158,7 @@ export default function fundAccount(axiosClient: AxiosClient) {
       if (!fundAccountId) {
         throw new RazorpayxError('`fundAccountId` is missing');
       }
-      let url = `${BASE_URL}/${fundAccountId}`;
+      const url = `${BASE_URL}/${fundAccountId}`;
       return axiosClient.get<FundAccount>({ url });
     },
   };

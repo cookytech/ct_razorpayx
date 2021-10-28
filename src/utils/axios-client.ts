@@ -16,7 +16,7 @@ function getValidHeaders(headers?: Headers) {
     return result;
   }
 
-  return Object.keys(headers).reduce(function (result, headerName) {
+  return Object.keys(headers).reduce((_, headerName): Headers => {
     if (Object.prototype.hasOwnProperty.call(allowedHeaders, headerName)) {
       result[headerName] = headers[headerName];
     }
@@ -43,7 +43,7 @@ class AxiosClient {
       return await this.axiosInstance.get<ResponseType>(params.url, { params: params.data });
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        onError(<AxiosError<RazorpayxErrorResponse>>error);
+        onError(error as AxiosError<RazorpayxErrorResponse>);
       }
     }
   }
@@ -53,7 +53,7 @@ class AxiosClient {
       return await this.axiosInstance.post<ResponseType>(params.url, params.data);
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        onError(<AxiosError<RazorpayxErrorResponse>>error);
+        onError(error as AxiosError<RazorpayxErrorResponse>);
       }
     }
   }
@@ -62,7 +62,7 @@ class AxiosClient {
       return await this.axiosInstance.patch<ResponseType>(params.url, params.data);
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        onError(<AxiosError<RazorpayxErrorResponse>>error);
+        onError(error as AxiosError<RazorpayxErrorResponse>);
       }
     }
   }
