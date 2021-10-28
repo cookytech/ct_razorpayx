@@ -35,7 +35,7 @@ export const mock = (params: any) => {
       requestQueryParams = qp;
       return true;
     })
-    .reply(status, function (_, __) {
+    .reply(status, function (replyUrl: string, replyRequestBody: nock.Body) {
       if (replyWithError) {
         return FIXTURES.error;
       }
@@ -43,10 +43,10 @@ export const mock = (params: any) => {
       return {
         success: true,
         __JUST_FOR_TESTS__: {
-          url,
+          url: replyUrl,
           method,
           requestQueryParams,
-          requestBody,
+          requestBody: replyRequestBody,
           headers: this.req.headers,
         },
       };
