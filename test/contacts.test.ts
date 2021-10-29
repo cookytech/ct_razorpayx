@@ -1,7 +1,7 @@
 import { AxiosResponse } from 'axios';
 import { assert } from 'chai';
 import equal from 'deep-equal';
-import { CreateContactParams, FetchContactQueryParams } from '../src/resources/contacts';
+import { CreateContactParams, FetchContactQueryParams, UpdateContactParams } from '../src/resources/contacts';
 import { getDateInSecs } from '../src/utils/utils';
 import mock, { MockResponse } from './utils/mocker';
 import razorpayx from './utils/razorpayx';
@@ -38,7 +38,7 @@ describe('Contacts', () => {
     assert.ok(equal(data.__JUST_FOR_TESTS__.requestBody, expectedParams), 'All params are passed in request body');
   });
   it('Update Contact', async () => {
-    const params = {
+    const params: UpdateContactParams = {
       name: 'test',
       email: 'test@razorpay.com',
       contact: '123456789',
@@ -48,7 +48,7 @@ describe('Contacts', () => {
       },
     };
 
-    const expectedParams = {
+    const expectedParams: UpdateContactParams = {
       name: 'test',
       email: 'test@razorpay.com',
       contact: '123456789',
@@ -95,6 +95,7 @@ describe('Contacts', () => {
 
     const params: FetchContactQueryParams = {
       name: 'test',
+
       from: fromDate,
       to: toDateInSec,
       count: 20,

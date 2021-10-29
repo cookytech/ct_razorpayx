@@ -4,11 +4,29 @@ import RazorpayxError from '../utils/razorpayx_error';
 import { normalizeDate } from '../utils/utils';
 
 export interface CreateFundAccountParams {
+  /**
+   * This is the unique identifier linked to a contact. For example, `cont_00000000000001`.
+   */
   contact_id: string;
+  /**
+   * The account type you want to link to the contact ID. For example, `bank_account`.
+   */
   account_type: AccountType;
+  /**
+   * The contact's virtual payment address (VPA) details.
+   */
   vpa?: Vpa;
+  /**
+   * The contact's bank account details.
+   */
   bank_account?: BankAccount;
+  /**
+   * The contact's card details.
+   */
   card?: Card;
+  /**
+   * The contact's card details.
+   */
   wallet?: Wallet;
 }
 
@@ -19,15 +37,36 @@ export enum AccountType {
   wallet = 'wallet',
 }
 export interface Vpa {
+  /**
+   * Between 3 and 100 characters. Supported characters: `a-z`, `A-Z`, `0-9`, `.`, `-` and one `@`.
+   *  The virtual payment address. For example, `gauravkumar@exampleupi`.
+   */
   address: string;
 }
 export interface Card {
+  /**
+   * Card Name
+   */
   name: string;
+  /**
+   * Card Number
+   */
   number: string;
 }
 export interface BankAccount {
+  /**
+   * Account holder's name. Name must be between 4 - 120 characters. This field is case-sensitive.
+   *  Name cannot end with a special character, except `.`. Supported characters:
+   *  `a-z`, `A-Z`, `0-9`, `space`,` ’` , `-` , `_ `, `/` , `( `,` )` and , `.`. For example, `Gaurav Kumar`.
+   */
   name: string;
+  /**
+   * Beneficiary bank IFSC. Has to be 11 characters. Unique identifier of a bank branch. For example, `HDFC0000053`.
+   */
   ifsc: string;
+  /**
+   * Beneficiary account number. Between 5 and 35 characters. Supported characters: `a-z`, `A-Z` and `0-9`. Beneficiary account number. For example, `765432123456789`.
+   */
   account_number: string;
 }
 export interface Wallet {
@@ -38,20 +77,61 @@ export interface Wallet {
 }
 
 export interface FundAccount {
+  /**
+   * The unique identifier linked to the fund account. For example, `fa_00000000000001`.
+   */
   id: string;
+  /**
+   *  Here it will be `fund_account`.
+   */
   entity: string;
+  /**
+   * The unique identifier linked to the contact. For example, `cont_00000000000001`.
+   */
   contact_id: string;
+  /**
+   * The fund account type being created.
+   */
   account_type: AccountType;
+  /**
+   * Possible values:
+   * * true: active
+   * * false: inactive
+   */
   active: boolean;
+  /**
+   * This parameter is populated if the fund account was created as part of a bulk upload. For example, `batch_00000000000001`.
+   */
   batch_id: string;
+  /**
+   * Timestamp, in Unix, when the fund account was created. For example, 1545320320.
+   */
   created_at: number;
+  /**
+   * The contact's virtual payment address (VPA) details.
+   */
   vpa?: Vpa;
+  /**
+   * The contact's bank account details.
+   */
   bank_account?: BankAccount;
+  /**
+   * The contact's card.
+   */
   card?: Card;
 }
 
 export interface FetchAllFundAccountParms extends FetchAllQueryParams {
+  /**
+   * The fund account type to be fetched. Possible values:
+   * * bank_account
+   * * vpa
+   * * card (if payouts to cards is enabled on your account)
+   */
   account_type?: AccountType;
+  /**
+   * The unique contact ID for which fund accounts are to be fetched. For example, `cont_00000000000001`.
+   */
   contact_id?: string;
 }
 
