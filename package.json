@@ -1,6 +1,6 @@
 {
   "name": "ct-razorpayx",
-  "version": "0.0.1-beta.0",
+  "version": "0.0.1-beta.1",
   "description": "Unofficial package for Razorpayx API.",
   "main": "lib/src/razorpayx.js",
   "types": "lib/src/razorpayx.d.ts",

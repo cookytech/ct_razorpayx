@@ -10,43 +10,168 @@ export enum UserType {
   self = 'self',
 }
 export interface CreateContactParams {
+  /**
+   * The contact's name. This field is case-sensitive.
+   * A minimum of 3 characters and a maximum of 50 characters are allowed.
+   * Name cannot end with a special character, except .. Supported
+   * characters: `a-z`, `A-Z`, `0-9`, `space`, `’` , `-` , `_` , `/` , `(` , `)` and , `.`.
+   * For example, `Gaurav Kumar`.
+   */
   name: string;
+  /**
+   * The contact's email address. For example, `gaurav.kumar@example.com`.
+   */
   email?: string;
+  /**
+   * The contact's phone number. For example, `9123456789`.
+   */
   contact?: string;
+  /**
+   * Maximum 40 characters. Classification for the contact being created.
+   * For example, `employee`. The following classifications are available by default:
+   * * vendor
+   * * customer
+   * * employee
+   * * self
+   * Additional Classifications can be created via the [Dashboard](https://x.razorpay.com) and then used in APIs.
+   * It is not possible to create new Classifications via API.
+   */
   type?: UserType | string;
+  /**
+   * Maximum 40 characters. A user-entered reference for the contact. For example, `Acme Contact ID 12345`
+   */
   reference_id?: string;
-  notes: Notes;
+  /**
+   * Key-value pair that can be used to store additional information about the entity.
+   * Maximum 15 key-value pairs, 256 characters (maximum) each. For example, `"note_key": "Beam me up Scotty”`.
+   */
+  notes?: Notes;
 }
 export interface UpdateContactParams {
-  name?: string;
+  /**
+   * The contact's name. This field is case-sensitive.
+   * A minimum of 3 characters and a maximum of 50 characters are allowed.
+   * Name cannot end with a special character, except .. Supported
+   * characters: `a-z`, `A-Z`, `0-9`, `space`, `’` , `-` , `_` , `/` , `(` , `)` and , `.`.
+   * For example, `Gaurav Kumar`.
+   */
+  name: string;
+  /**
+   * The contact's email address. For example, `gaurav.kumar@example.com`.
+   */
   email?: string;
+  /**
+   * The contact's phone number. For example, `9123456789`.
+   */
   contact?: string;
+  /**
+   * Maximum 40 characters. Classification for the contact being created.
+   * For example, `employee`. The following classifications are available by default:
+   * * vendor
+   * * customer
+   * * employee
+   * * self
+   * Additional Classifications can be created via the [Dashboard](https://x.razorpay.com) and then used in APIs.
+   * It is not possible to create new Classifications via API.
+   */
   type?: UserType | string;
+  /**
+   * Maximum 40 characters. A user-entered reference for the contact. For example, `Acme Contact ID 12345`
+   */
   reference_id?: string;
-  notes: Notes;
+  /**
+   * Key-value pair that can be used to store additional information about the entity.
+   * Maximum 15 key-value pairs, 256 characters (maximum) each. For example, `"note_key": "Beam me up Scotty”`.
+   */
+  notes?: Notes;
 }
 export interface Contact {
+  /**
+   * The unique identifier linked to the contact. For example, `cont_00000000000001`.
+   */
   id: string;
+  /**
+   * The entity being created. Here, it will be `contact`.
+   */
   entity: string;
+  /**
+   * The contact's name. For example, `Gaurav Kumar`.
+   */
   name: string;
+  /**
+   * The contact's phone number. For example, `9123456789`.
+   */
   contact: string;
+  /**
+   * The contact's email address. For example, `gaurav.kumar@example.com`.
+   */
   email: string;
-  type: string;
+  /**
+   * A classification for the contact being created. For example, `employee`.
+   */
+  type: UserType | string;
+  /**
+   * A user-entered reference for the contact. For example, `Acme Contact ID 12345`.
+   */
   reference_id: string;
+  /**
+   * This parameter is populated if the contact was created as part of a bulk upload. For example, `batch_00000000000001`.
+   */
   batch_id: string;
+  /**
+   * Possible values:
+   * * `true` (default) = active
+   * * `false` = inactive
+   */
   active: boolean;
+  /**
+   *  Key-value pair that can be used to store additional information about the entity.
+   *  Maximum 15 key-value pairs, 256 characters (maximum) each. For example, `"note_key": "Beam me up Scotty”`.
+   */
   notes: Notes;
+  /**
+   * Timestamp, in Unix, when the contact was created. For example, `1545320320`.
+   */
   created_at: number;
 }
 
 export interface FetchContactQueryParams extends FetchAllQueryParams {
+  /**
+   * Name by which results should be filtered. For example, `Gaurav`.
+   */
   name?: string;
+  /**
+   * Email address by which results should be filtered. For example, `gaurav.kumar@example.com`.
+   */
   email?: string;
+  /**
+   * Phone number by which results should be filtered. For example, `9123456789`.
+   */
   contact?: string;
+  /**
+   * The user-generated reference by which results should be filtered.
+   * For example, `Acme Contact ID 12345`. Maximum length 40 characters.
+   */
   reference_id?: string;
+  /**
+   * The state by which results should be filtered. Possible values:
+   * * `true` = active
+   * * `false` = inactive
+   */
   active?: boolean;
+  /**
+   * The classification by which results should be filtered. Possible values:
+   * * vendor
+   * * customer
+   * * employee
+   * * self
+   *
+   *  or
+   * any additional classifications  created via the [Dashboard](https://x.razorpay.com).
+   */
   type?: UserType | string;
 }
+
 export default function contacts(axiosClient: AxiosClient) {
   const BASE_URL = '/contacts';
   return {
@@ -64,6 +189,10 @@ export default function contacts(axiosClient: AxiosClient) {
      * @returns
      */
     async create(params: CreateContactParams) {
+      const { name } = params;
+      if (name.length < 3 || name.length > 100) {
+        throw new RazorpayxError('`name` should be 3 to 50 characters long');
+      }
       const url = BASE_URL;
       return axiosClient.post<Contact>({ url, data: params });
     },
@@ -94,7 +223,7 @@ export default function contacts(axiosClient: AxiosClient) {
      *
      * `false` = inactive
      *
-     * Pass false to deactivate an active contact and pass true to activate a deactivated contact.
+     * Pass `false` to deactivate an active contact and pass `true` to activate a deactivated contact.
      * @returns
      */
     async toggleActiveContact(contactId: string, active: boolean) {

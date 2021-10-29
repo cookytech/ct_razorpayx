@@ -40,7 +40,7 @@ class AxiosClient {
 
   async get<ResponseType = any>(params: { url: string; data?: any }) {
     try {
-      return await this.axiosInstance.get<ResponseType>(params.url, { params: params.data });
+      return (await this.axiosInstance.get<ResponseType>(params.url, { params: params.data })).data;
     } catch (error) {
       if (axios.isAxiosError(error)) {
         onError(error as AxiosError<RazorpayxErrorResponse>);
@@ -50,7 +50,7 @@ class AxiosClient {
 
   async post<ResponseType = any>(params: { url: string; data?: any }) {
     try {
-      return await this.axiosInstance.post<ResponseType>(params.url, params.data);
+      return (await this.axiosInstance.post<ResponseType>(params.url, params.data)).data;
     } catch (error) {
       if (axios.isAxiosError(error)) {
         onError(error as AxiosError<RazorpayxErrorResponse>);
@@ -59,7 +59,7 @@ class AxiosClient {
   }
   async patch<ResponseType = any>(params: { url: string; data: any }) {
     try {
-      return await this.axiosInstance.patch<ResponseType>(params.url, params.data);
+      return (await this.axiosInstance.patch<ResponseType>(params.url, params.data)).data;
     } catch (error) {
       if (axios.isAxiosError(error)) {
         onError(error as AxiosError<RazorpayxErrorResponse>);

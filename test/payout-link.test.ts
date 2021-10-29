@@ -29,7 +29,7 @@ describe('Payout Link', () => {
     });
 
     const response = await razorpayx.payoutLink.create(params);
-    const data = response?.data as any as MockResponse;
+    const data = response as any as MockResponse;
     assert.equal(data.__JUST_FOR_TESTS__.url, '/v1/payout-links', 'Create Payout request url formed');
     assert.ok(equal(data.__JUST_FOR_TESTS__.requestBody, expectedParams), 'All params are passed in request body');
   });
@@ -42,7 +42,7 @@ describe('Payout Link', () => {
     });
 
     const response = await razorpayx.payoutLink.cancelPayoutLink(payoutLinkId);
-    const data = response?.data as any as MockResponse;
+    const data = response as any as MockResponse;
     assert.equal(
       data.__JUST_FOR_TESTS__.url,
       `/v1/payout-links/${payoutLinkId}/cancel`,
@@ -78,7 +78,7 @@ describe('Payout Link', () => {
       method: 'GET',
     });
     const response = await razorpayx.payoutLink.fetchAll(params);
-    const data = response?.data as any as MockResponse;
+    const data = response as any as MockResponse;
     const expectedUrl = `/v1/payout-links?contact_id=${contactId}&from=${fromDateInSec}&to=${toDateInSec}&count=${params.count}&skip=${params.skip}`;
     assert.equal(data.__JUST_FOR_TESTS__.url, expectedUrl, 'Fetch All Payout Links request url formed');
     assert.ok(
@@ -94,7 +94,7 @@ describe('Payout Link', () => {
     });
 
     const response = await razorpayx.payoutLink.fetch(payoutLinkId);
-    const data = response?.data as any as MockResponse;
+    const data = response as any as MockResponse;
     assert.equal(
       data.__JUST_FOR_TESTS__.url,
       `/v1/payout-links/${payoutLinkId}`,
