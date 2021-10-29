@@ -15,7 +15,7 @@ export interface CreateContactParams {
   contact?: string;
   type?: UserType | string;
   reference_id?: string;
-  notes: Notes;
+  notes?: Notes;
 }
 export interface UpdateContactParams {
   name?: string;
@@ -23,7 +23,7 @@ export interface UpdateContactParams {
   contact?: string;
   type?: UserType | string;
   reference_id?: string;
-  notes: Notes;
+  notes?: Notes;
 }
 export interface Contact {
   id: string;
